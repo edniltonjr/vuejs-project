@@ -6,7 +6,7 @@ export default {
   },
 
   atualizar: (pedido) => {
-      return http.put('/atv/pedidos/pd/att', pedido)
+      return http.put('/atv/pedidos/pd/att/', pedido)
   }
 }
 

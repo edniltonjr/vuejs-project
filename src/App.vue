@@ -65,10 +65,12 @@
       </v-snackbar>
       <form v-for="(pedido, numped) in pedidos" :key="numped">
          <v-text-field :value="pedido.OBS" :v-model="pedido.obss"></v-text-field>
-         <v-text-field :value="pedido.OBS"></v-text-field>
-            <v-text-field :value="pedido.OBS1" ></v-text-field>
-            <v-text-field :value="pedido.OBS2"></v-text-field>
-            <v-btn depressed small color="primary" @click="editar(console.log(this.pedido.numped) + this.pedido)">Atualizar</v-btn>
+      <form>
+       <!-- <v-text-field v-model="pedido.numped"></v-text-field> -->
+         <v-text-field v-model="pedido.obs"></v-text-field>
+            <v-text-field v-model='pedido.obs1' name='OBS1'></v-text-field>
+            <v-text-field v-model='pedido.obs2'></v-text-field>
+            <v-btn depressed small color="primary" @click="editar(pedido)">Atualizar</v-btn>
       </form>
        <v-simple-table>
     <template v-slot:default>
@@ -120,10 +122,10 @@ export default {
         numcar: ''
       },
       pedido: {
-        numped: '',
-        obss: '',
-        obss1: '',
-        obss2: ''
+        numped: "",
+        obs: "",
+        obs1: "",
+        obs2: ""
       },
       pedidos: [],
       carregamentos: [],
@@ -166,19 +168,17 @@ export default {
 
     editar() {
       Pedido.atualizar(this.pedido).then(response => {
+        const a = this.pedido.numped
         this.pedido = {}
         this.errors = {}
-        alert('Atualizado')
+        alert('Atualizado')   
+        console.log(a)
+        listar(a)
       }).catch(e => {
-        this.errors = e.response.data.errors
+        const response = e.response
+        this.errors = response.data.errors
       })
     },
-
-
-    consultar () {
-      console.log('PEDIDO: ' + this.pedido.numped)
-      console.log('OBS: ' + this.pedido.obss)
-      },
 
     save () {
       this.snack = true
