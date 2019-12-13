@@ -64,7 +64,7 @@
         <v-btn text @click="snack = false">Close</v-btn>
       </v-snackbar>
       <form v-for="(pedido, numped) in pedidos" :key="numped">
-         <v-text-field :value="pedido.OBS"></v-text-field>
+         <v-text-field :value="pedido.OBS" :v-model="pedido.obss"></v-text-field>
             <v-text-field :value="pedido.OBS1" ></v-text-field>
             <v-text-field :value="pedido.OBS2"></v-text-field>
             <v-btn depressed small color="primary" @click="editar(this.pedido)">Atualizar</v-btn>
