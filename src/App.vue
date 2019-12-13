@@ -65,38 +65,28 @@
       </v-snackbar>
       <form v-for="(pedido, numped) in pedidos" :key="numped">
          <v-text-field :value="pedido.OBS" :v-model="pedido.obss"></v-text-field>
+         <v-text-field :value="pedido.OBS"></v-text-field>
             <v-text-field :value="pedido.OBS1" ></v-text-field>
             <v-text-field :value="pedido.OBS2"></v-text-field>
-            <v-btn depressed small color="primary" @click="editar(this.pedido)">Atualizar</v-btn>
+            <v-btn depressed small color="primary" @click="editar(console.log(this.pedido.numped) + this.pedido)">Atualizar</v-btn>
       </form>
        <v-simple-table>
     <template v-slot:default>
                       <thead>
         <tr>
-          <th class="text-left">Nº PEDIDO</th>
           <th class="text-left">OBS1</th>
           <th class="text-left">OBS2</th>
           <th class="text-left">OBS3</th>
-          <th class="text-left"></th>
         </tr>
       </thead>
       
       <tbody>
 
         <tr v-for="(pedido, numped) in pedidos" :key="numped">
-          <td>{{ pedido.NUMPED }}</td><input>
           <td>{{ pedido.OBS }}</td>
           <td>{{ pedido.OBS1 }}</td>
           <td>{{ pedido.OBS2 }}</td>
-          <td>      <v-avatar color="indigo">
-
-        <v-icon dark>mdi-account-circle</v-icon>
-      </v-avatar></td>
-      <td><button @click="consultar()">ttt</button></td>
-        </tr>
-
-
-        
+        </tr>      
       </tbody>
           </template>
   </v-simple-table>
@@ -177,8 +167,8 @@ export default {
     editar() {
       Pedido.atualizar(this.pedido).then(response => {
         this.pedido = {}
+        this.errors = {}
         alert('Atualizado')
-        this.errors = []
       }).catch(e => {
         this.errors = e.response.data.errors
       })
@@ -186,8 +176,9 @@ export default {
 
 
     consultar () {
-     // console.log('PEDIDO: ' + this.pedido.numped)
-    },
+      console.log('PEDIDO: ' + this.pedido.numped)
+      console.log('OBS: ' + this.pedido.obss)
+      },
 
     save () {
       this.snack = true
